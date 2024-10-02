@@ -171,3 +171,125 @@ foreign key(numeroPasaporte) references atleta(numeroPasaporte)
 
 alter table participar add constraint participar_fkey2
 foreign key(idEvento) references evento(idEvento)
+
+DROP SCHEMA IF EXISTS JuegosOlímpicos CASCADE;
+CREATE SCHEMA JuegosOlímpicos;
+
+-------------TABLAS CON LLAVES PRIMARIAS-----------------
+
+
+--Tabla Localidad
+CREATE TABLE localidad(
+	idLocalidad INT,
+	nombrePais VARCHAR(50),
+	calle VARCHAR(50),
+	numero INT,
+	ciudad VARCHAR(50),
+	nombre VARCHAR(50),
+	tipo VARCHAR(50),
+	aforo INT
+);
+
+ --Restricciones Localidad
+ 	--Dominio
+alter table localidad alter column idLocalidad
+set not null;
+ALTER TABLE localidad ADD CONSTRAINT localidad_d1
+CHECK(nombrePais is not null and nombrePais <> '');
+ALTER TABLE localidad ADD CONSTRAINT localidad_d2
+CHECK(calle is not null and calle <> '');
+alter table localidad alter column numero
+set not null;
+ALTER TABLE localidad ADD CONSTRAINT localidad_d3
+CHECK(ciudad is not null and ciudad <> '');
+ALTER TABLE localidad ADD CONSTRAINT localidad_d4
+CHECK(nombre is not null and nombre <> '');
+alter table localidad add constraint localidad_d5
+CHECK(tipo is not null and tipo <> '');
+alter table localidad add constraint localidad_d6
+CHECK(aforo is not null and aforo > 0);
+
+
+	--Entidad
+ALTER TABLE localidad ADD CONSTRAINT localidad_pkey
+PRIMARY KEY (idLocalidad);
+
+	--Referencial
+alter table localidad add constraint localidad_fkey
+foreign key (nombrePais) references pais(nombrePais);
+
+
+--Tabla Patrocinador 
+create table patrocinador(
+	nombrePatrocinador VARCHAR(50)
+);
+
+--Restricciones Patrocinador
+	--Dominio
+alter table patrocinador add constraint patrocinador_d1
+check(nombrePatrocinador is not null and nombrePatrocinador <> '');
+	--Entidad
+alter table patrocinador add constraint patrocinador_pkey
+primary key (nombrePatrocinador);
+
+
+--Tabla Disciplina
+create table disciplina(
+	nombreDisciplina VARCHAR(50),
+	categoria CHAR(10)
+);
+--Restricciones Disciplina
+	--Dominino
+alter table disciplina add constraint disciplina_d1
+check (nombreDisciplina is not null and nombreDisciplina <> '');
+alter table disciplina add constraint disciplina_d2
+check(categoria = 'Individual' or categoria = 'Equipo')
+
+	--Entidad
+alter table disciplina add constraint disciplina_pkey
+primary key (nombreDisciplina);
+
+
+--Tabla Medalla
+create table medalla(
+	numeroMedalla INT,
+	nombreDisciplina VARCHAR(50),
+	numeroPasaporte INT,
+	tipo CHAR(6)
+);
+
+--Restricciones Medalla
+	--Dominio
+alter table medalla add constraint medalla_d1
+check(numeroMedalla is not null and numeroMedalla > 0);
+alter table medalla add constraint medalla_d2
+check(nombreDisciplina is not null  and nombreDisciplina <> '');
+alter table medalla alter column numeroPasaporte set not null;
+alter table medalla add constraint medalla_d3
+check(tipo = 'Oro' or tipo = 'Plata' or tipo='Bronce');
+	--Entidad
+alter table medalla add constraint medalla_pkey
+primary key (numeroMedalla);
+	-- Referencial
+alter table medalla add constraint medalla_fkey1
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+alter table medalla add constraint medalla_fkey2
+foreign key (numeroPasaporte) references atleta(numeroPasaporte);
+
+--Tabla patrocinar
+create table patrocinar(
+	nombrePatrocinador VARCHAR(50),
+	nombreDisciplina VARCHAR(50)
+);
+
+--Restricciones Patrocinar	
+	--Dominio
+alter table patrocinar add constraint patrocinar_d1
+check(nombrePatrocinador is not null and nombrePatrocinador <> '');
+alter table patrocinar add constraint patrocinar_d2
+check (nombreDisciplina is not null and nombreDisciplina <> '');
+	--Referencial
+alter table patrocinar add constraint medalla_fkey1
+foreign key (nombrePatrocinador) references patrocinador(nombrePatrocinador);
+alter table patrocinar add constraint medalla_fkey2
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
