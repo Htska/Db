@@ -11,17 +11,17 @@ create table atleta (
 	genero char(1)
 );
 
-create table telefonoAtleta(
+create table telefonoAtleta (
 	numeroPasaporte char(10),
 	telefono char(10)
 );
 
-create table correoAtleta(
+create table correoAtleta (
 	numeroPasaporte char(10),
 	correo varchar(50)
 );
 
-create table evento(
+create table evento (
 	idEvento int,
 	idLocalidad int,
 	nombreDisciplina varchar(50),
@@ -30,7 +30,7 @@ create table evento(
 	duracionMaxima int
 );
 
-create table entrada(
+create table entrada (
 	folio char(20),
 	nombreFase varchar(20),
 	idEvento int,
@@ -38,11 +38,11 @@ create table entrada(
 	costoBase int
 );
 
-create table pais(
+create table pais (
 	nombrePais varchar(50)
 );
 
-create table localidad(
+create table localidad (
 	idLocalidad int,
 	nombrePais varchar(50),
 	calle varchar(50),
@@ -53,19 +53,19 @@ create table localidad(
 	aforo int
 );
 
-create table patrocinador(
+create table patrocinador (
 	nombrePatrocinador varchar(50)
 );
 
-create table disciplina(
+create table disciplina (
 	nombreDisciplina varchar(50),
 	categoria char(10)
 );
 
-create table medalla(
+create table medalla (
 	numeroMedalla int,
 	nombreDisciplina varchar(50),
-	numeroPasaporte int,
+	numeroPasaporte char(10),
 	tipo char(6)
 );
 
@@ -96,8 +96,8 @@ create table fase (
 -- Tablas "Relaciones"
 
 create table practicar(
-numeroPasaporte char(10),
-nombreDisciplina varchar(50)
+	numeroPasaporte char(10),
+	nombreDisciplina varchar(50)
 );
 
 create table participar(
@@ -298,7 +298,7 @@ alter table evento add constraint evento_pkey
 primary key(idEvento);
 
 alter table entrada add constraint entrada_pkey
-primary key(folio);
+primary key(folio, nombreFase, idEvento); -- Primary Key Compuesta
 
 alter table pais add constraint pais_pkey
 primary key(nombrePais);
@@ -313,7 +313,7 @@ alter table disciplina add constraint disciplina_pkey
 primary key (nombreDisciplina);
 
 alter table medalla add constraint medalla_pkey
-primary key (numeroMedalla);
+primary key (numeroMedalla, nombreDisciplina); -- Primary Key Compuesta
 
 alter table juez add constraint juez_pkey
 primary key(numeroPasaporte);
@@ -345,10 +345,7 @@ alter table evento add constraint evento_fkey2
 foreign key(nombreDisciplina) references disciplina(nombreDisciplina);
 
 alter table entrada add constraint entrada_fkey1
-foreign key(nombreFase) references fase(nombreFase);
-
-alter table entrada add constraint entrada_fkey2
-foreign key(idEvento) references evento(idEvento);
+foreign key(nombreFase, idEvento) references fase(nombreFase, idEvento); -- Foreign Key compuesta
 
 alter table localidad add constraint localidad_fkey
 foreign key (nombrePais) references pais(nombrePais);
