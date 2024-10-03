@@ -1,5 +1,4 @@
 -- Tablas "Entidades"
-
 create table atleta (
 	numeroPasaporte char(10),
 	nombrePais varchar(50),
@@ -93,6 +92,26 @@ create table fase (
 	idEvento int
 );
 
+create table entrenador (
+	numeroPasaporte char(10),
+	nombreDisciplina varchar(50),
+	fechaNacimiento date,
+	nacionalidad varchar(50),
+	nombre varchar(50),
+	primerApellido varchar(50),
+	segundoApellido varchar(50)
+);
+
+create table telefonoEntrenador (
+	numeroPasaporte char(10),
+	telefono char(10)
+);
+
+create table correoEntrenador (
+	numeroPasaporte char(10),
+	correo varchar(50)
+);
+
 -- Tablas "Relaciones"
 
 create table practicar(
@@ -113,6 +132,11 @@ create table patrocinar(
 create table supervisar (
 	numeroPasaporte char(10),
 	nombreDisciplina varchar(50)
+);
+
+create table entrenar(
+	numeroPasaporteE char(10),
+	numeroPasaporteA char(10)
 );
 
 -- Restriciones 
@@ -283,6 +307,40 @@ check (correo like '%_@_%._%');
 alter table fase add constraint fase_d1
 check (nombreFase <> '');
 
+-- Entrenador
+alter table entrenador add constraint entrenador_d1
+check (char_length(numeroPasaporte)=10);
+
+alter table entrenador add constraint entrenador_d2
+check(nombreDisciplina is not null and nombreDisciplina <> '');
+
+alter table entrenador alter column fechaNacimiento
+set not null;
+
+alter table entrenador add constraint entrenador_d3
+check (nacionalidad <> '');
+
+alter table entrenador add constraint entrenador_d4
+check (nombre <> '');
+
+alter table entrenador add constraint entrenador_d5
+check (primerApellido <> '');
+
+-- TeléfonoEntrenador
+alter table telefonoEntrenador add constraint telefonoEntrenador_d1
+check (telefono similar to '[0-9]{10}');
+
+-- CorreoEntrenador
+alter table correoEntrenador add constraint correoEntrenador_d1
+check (correo like '%_@_%._%');
+
+-- Entrenar
+alter table entrenar alter column numeroPasaporteE
+set not null;
+
+alter table entrenar alter column numeroPasaporteA
+set not null;
+
 -- Llaves Primarias
 
 alter table atleta add constraint atleta_pkey
@@ -326,6 +384,15 @@ primary key(numeroPasaporte, correo);
 
 alter table fase add constraint fase_pkey
 primary key(nombreFase, idEvento);
+
+alter table entrenador add constraint entrenador_pkey
+primary key(numeroPasaporte);
+
+alter table telefonoEntrenador add constraint telefonoEntrenador_pkey
+primary key(numeroPasaporte, telefono);
+
+alter table correoEntrenador add constraint correoEntrenador_pkey
+primary key(numeroPasaporte, correo);
 
 -- Llaves Foráneas 
 
@@ -391,3 +458,17 @@ foreign key(numeroPasaporte) references juez(numeroPasaporte);
 alter table supervisar add constraint supervisar_fkey2
 foreign key(nombreDisciplina) references disciplina(nombreDisciplina);
 
+alter table entrenador add constraint entrenador_fkey
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+
+alter table telefonoEntrenador add constraint telefonoEntrenador_fkey
+foreign key(numeroPasaporte) references entrenador(numeroPasaporte);
+
+alter table correoEntrenador add constraint correoEntrenador_fkey
+foreign key(numeroPasaporte) references entrenador(numeroPasaporte);
+
+alter table entrenar add constraint entrenar_fkey1
+foreign key(numeroPasaporteE) references entrenador(numeroPasaporte);
+
+alter table entrenar add constraint entrenar_fkey2
+foreign key(numeroPasaporteA) references atleta(numeroPasaporte);
