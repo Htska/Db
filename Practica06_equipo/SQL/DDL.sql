@@ -476,6 +476,47 @@ foreign key(numeroPasaporteA) references atleta(numeroPasaporte);
 
 -- Comentarios 
 
+-- atleta
+comment on table atleta is 'Tabla que contiene a los atletas que participan en los JJOO';
+comment on column atleta.numeroPasaporte is 'Número del pasaporte del atleta, es su identificador';
+comment on column atleta.nombrePais is 'Nombre del país que representa el atleta';
+comment on column atleta.fechaNacimiento is 'Fecha de nacimiento del atleta';
+comment on column atleta.nacionalidad is 'Nacionalidad del atleta';
+comment on column atleta.nombre is 'Nombre del atleta';
+comment on column atleta.primerApellido is 'Primer apellido del atleta';
+comment on column atleta.segundoApellido is 'Segundo apellido del atleta, si tiene';
+comment on column atleta.genero is 'Genero del atleta (M|F)';
+comment on constraint atleta_pkey on atleta is 'La llave primaria de la tabla atleta';
+comment on constraint atleta_fkey on atleta is 'La llave foránea de la tabla atleta, hace referencia a la tabla pais';
+comment on constraint atleta_d1 on atleta is 'Restricción check que asegura que la longitud del número de pasaporte sea 10';
+comment on constraint atleta_d2 on atleta is 'Restricción check que asegura que el nombre del Pais del atleta no sea vacío';
+comment on constraint atleta_d3 on atleta is 'Restricción check que asegura que la nacionalidad no es vacía';
+comment on constraint atleta_d4 on atleta is 'Restricción check que asegura que el nombre del atleta no sea vacío';
+comment on constraint atleta_d5 on atleta is 'Restricción check que asegura que el primer apellido del atleta no sea vacío';
+comment on constraint atleta_d6 on atleta is 'Restricción check que asegura que el género sea F o M';
+
+-- teléfonoAtleta
+comment on table telefonoAtleta is 'Tabla que contiene los telefonos de los atletas';
+comment on column telefonoAtleta.numeroPasaporte is 'Número del pasaporte del atleta que tiene el télefono asociado';
+comment on column telefonoAtleta.telefono is 'Número de télefono del atleta';
+comment on constraint telefonoAtleta_pkey on telefonoAtleta is 'La llave primaria de la tabla telefonoAtleta';
+comment on constraint telefonoAtleta_fkey on telefonoAtleta is 'La llave foránea de la tabla telefonoAtleta, hace refencia a la tabla atleta';
+comment on constraint telefonoAtleta_d1 on telefonoAtleta is 'Restricción check que asegura que un telefono tiene longitud 10 y contiene únicamente números';
+
+-- correoAtleta
+comment on table correoAtleta is 'Tabla que contiene los correos de los atletas';
+comment on column correoAtleta.numeroPasaporte is 'Número del pasaporte del atleta que tiene el correo asociado';
+comment on column correoAtleta.correo is 'Correo del atleta';
+comment on constraint correoAtleta_pkey on correoAtleta is 'La llave primaria de la tabla correoAtleta';
+comment on constraint correoAtleta_fkey on correoAtleta is 'La llave foránea de la tabla atleta, hace referencia a la tabla atleta';
+comment on constraint correoAtleta_d1 on correoAtleta is 'Restricción check que asegura que un correo tenga una estructura correcta';
+
+-- practicar
+comment on table practicar is 'Tabla que contiene la relación de practicar entre un atleta y una disciplina';
+comment on column practicar.numeroPasaporte is 'Número de pasaporte del atleta que practica la disciplina';
+comment on column practicar.nombreDisciplina is 'Nombre de la disciplina que practica el atleta';
+comment on constraint practicar_fkey1 on practicar is 'Llave foránea de la tabla practicar, hace refencia al numero de Pasaporte del atleta';
+comment on constraint practicar_fkey2 on practicar is 'Llave foránea de la tabla practicar, hace referencia al nombreDisciplina de la tabla disciplina';
 
 -- localidad
 comment on table localidad is 'Tabla que contiene las localidades disponibles para los eventos';
