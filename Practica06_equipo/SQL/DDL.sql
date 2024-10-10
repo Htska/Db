@@ -558,3 +558,47 @@ comment on constraint medalla_d3 on medalla is 'Restricción check que asegura q
 comment on constraint medalla_pkey on medalla is 'Llave primaria para medalla';
 comment on constraint medalla_fkey1 on medalla is 'Llave foránea para medalla que hace referencia a disciplina';
 comment on constraint medalla_fkey2 on medalla is 'Llave foránea para medalla que hace referencia a atleta';
+
+-- evento
+comment on table evento is 'Tabla que contiene todos los eventos acontecidos en los JJOO';
+comment on column evento.idEvento is 'Id del evento, es su identificador';
+comment on column evento.idLocalidad is 'Id de la localidad donde se llevará a cabo el evento';
+comment on column evento.fecha is 'La fecha en la que se dará lugar el evento';
+comment on column evento.horaInicio is 'La hora de inicio de un evento';
+comment on column evento.nombreDisciplina is 'El nombre de la disciplina que se llevará a cabo en el evento';
+comment on column evento.duracionMaxima is 'La duración máxima de un evento';
+comment on constraint evento_d1 on evento is 'Restricción check que asegura que el nombre de la disciplina no sea null o sea vacío';
+comment on constraint evento_d2 on evento is 'Restricción check que asegura que la duración máxima solo pueda ser un valor de 0 a 24 horas';
+comment on constraint evento_pkey on evento is 'La llave primaria de la tabla evento';
+comment on constraint evento_fkey1 on evento is 'Llave foránea de la tabla atleta, que hace referencia a la tabla localidad';
+comment on constraint evento_fkey2 on evento is 'Llave foránea de la tabla atleta, que hace referencia a la tabla disciplina';
+
+-- modificación de nombre de la columna numeroEvento a numeroAsiento en la tabla entrada
+alter table entrada rename column numeroEvento to numeroAsiento;
+
+-- entrada
+comment on table entrada is 'Tabla que contiene la información de una entrada a un evento';
+comment on column entrada.nombreFase is 'El nombre de la fase a la cual da acceso la entrada';
+comment on column entrada.idEvento is 'El identificador del evento al cual da acceso la entrada';
+comment on column entrada.numeroAsiento is 'El número de asiento asignado a una entrada';
+comment on column entrada.folio is 'El folio asignado a una entrada';
+comment on column entrada.costoBase is 'El costo inicial de una entrada de un evento';
+comment on constraint entrada_d1 on entrada is 'Restricción check que asegura que el folio no sea null y tenga una longitud de 20 caracteres';
+comment on constraint entrada_d2 on entrada is 'Restriccón check que asegura que nombreFase no sea null y no sea vacío';
+comment on constraint entrada_d3 on entrada is 'Restricción check que asegura que el costoBase no sea nulo y sea mayor o igual a 0';
+comment on constraint entrada_pkey on entrada is 'La llave primaria de la tabla entrada';
+comment on constraint entrada_fkey1 on entrada is 'Llave foránea de la tabla entrada, que hace referencia a la tabla fase';
+comment on constraint entrada_fkey2 on entrada is 'Llave foránea de la tabla entrada, que hace referencia a la tabla evento';
+
+-- pais
+comment on table pais is 'Tabla que contiene la información de un país que participa en los JJOO';
+comment on column pais.nombrePais is 'El nombre del país';
+comment on constraint pais_d1 on pais is 'Restricción check que asegura que el nombrePais no sea null y no sea vació';
+comment on constraint pais_pkey on pais is 'La llave primaria de la tabla entrada';
+
+-- participar
+comment on table participar is 'Tabla que contiene la información de la relación participar entre atleta y evento';
+comment on column participar.numeroPasaporte is 'El número de pasaporte de un atleta';
+comment on column participar.idEvento is 'El identificador de un evento';
+comment on constraint participar_fkey1 on participar is 'Llave foránea de la tabla participar, que hace referencia a la tabla atleta';
+comment on constraint participar_fkey2 on participar is 'Llave foránea de la tabla participar, que hace referencia a la tabla evento';
