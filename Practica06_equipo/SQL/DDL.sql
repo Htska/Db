@@ -521,6 +521,11 @@ comment on constraint practicar_fkey2 on practicar is 'Llave foránea de la tabl
 -- localidad
 comment on table localidad is 'Tabla que contiene las localidades disponibles para los eventos';
 comment on column localidad.idLocalidad is 'Identificador de la localidad';
+comment on column localidad.nombrePais is 'Nombre del pais donde se encuentra';
+comment on column localidad.calle  is  'Nombre de la calle en donde se encuentra';
+comment on column localidad.ciudad is 'Nombre de la ciudad donde se encuentra';
+comment on column localidad.nombre is 'Nombre de la localidad';
+comment on column localidad.aforo is 'Capacidad/Aforo que permite la localidad';
 comment on constraint localidad_d1 on localidad is 'Restricción check que asegura que el nombre del país de localidad no sea una cadena vacía. ';
 comment on constraint localidad_d2 on localidad is 'Restricción check que asegura que la calle no sea una cadena vacía.';
 comment on column localidad.numero is 'Numero de la ubicación de la localidad';
@@ -533,11 +538,14 @@ comment on constraint localidad_fkey on localidad is 'Llave foránea para locali
 
 -- patrocinador
 comment on table patrocinador is 'Tabla que contiene los patrocinadores de las disciplinas';
+comment on column patrocinador.nombrepatrocinador is 'Nombre del patrocinador';
 comment on constraint patrocinador_d1 on patrocinador is 'Restricción check que asegura que el nombre del patrocinador no sea una cadena vacía. ';
 comment on constraint patrocinador_pkey on patrocinador is 'Llave primaria para patrocinador';
 
 -- patrocinar
 comment on table patrocinar is 'Tabla que representa la relación patrocinar entre patrocinador y disciplina';
+comment on column patrocinar.nombrepatrocinador is 'Nombre del patrocinador';
+comment on column patrocinar.nombredisciplina  is 'Nombre de la disciplina';
 comment on constraint patrocinar_d1 on patrocinar is 'Restricción check que asegura que el nombre del patrocinador no sea una cadena vacía. ';
 comment on constraint patrocinar_d2 on patrocinar is 'Restricción check que asegura que el nombre de la disciplina no sea una cadena vacía. ';
 comment on constraint patrocinar_fkey1 on patrocinar is 'Llave foránea para patrocinar que hace referencia a patrocinador';
@@ -545,12 +553,17 @@ comment on constraint patrocinar_fkey2 on patrocinar is 'Llave foránea para pat
 
 -- disciplina
 comment on table disciplina is 'Tabla que contiene los disciplinas de los juegos olímpicos';
+comment on column disciplina.nombredisciplina is 'Nombre de la disciplina';
+comment on column disciplina.categoria  is 'La categoría a la que pertenece la disciplina';
 comment on constraint disciplina_d1 on disciplina is 'Restricción check que asegura que el nombre de la disciplina no sea una cadena vacía. ';
 comment on constraint disciplina_d2 on disciplina is 'Restricción check que asegura que la categoría de la disciplina sea o Individual o Equipo ';
 comment on constraint disciplina_pkey on disciplina is 'Llave primaria para disciplina';
 
 -- medalla
 comment on table medalla is 'Tabla que contiene las medallas otorgadas durante los juegos olímpicos';
+comment on column medalla.numeromedalla  is 'El número de medalla';
+comment on column medalla.nombredisciplina is 'Nombre de la disciplina';
+comment on column medalla.tipo is 'El tipo de medalla';
 comment on constraint medalla_d1 on medalla is 'Restricción check que asegura que el número de la medalla sea mayor a cero ';
 comment on constraint medalla_d2 on medalla is 'Restricción check que asegura que el nombre de la disciplina no sea una cadena vacía ';
 comment on column medalla.numeroPasaporte is 'Número de pasaporte del atleta';
@@ -588,7 +601,6 @@ comment on constraint entrada_d2 on entrada is 'Restriccón check que asegura qu
 comment on constraint entrada_d3 on entrada is 'Restricción check que asegura que el costoBase no sea nulo y sea mayor o igual a 0';
 comment on constraint entrada_pkey on entrada is 'La llave primaria de la tabla entrada';
 comment on constraint entrada_fkey1 on entrada is 'Llave foránea de la tabla entrada, que hace referencia a la tabla fase';
-comment on constraint entrada_fkey2 on entrada is 'Llave foránea de la tabla entrada, que hace referencia a la tabla evento';
 
 -- pais
 comment on table pais is 'Tabla que contiene la información de un país que participa en los JJOO';
