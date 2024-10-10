@@ -600,7 +600,7 @@ comment on constraint entrada_d1 on entrada is 'Restricción check que asegura q
 comment on constraint entrada_d2 on entrada is 'Restriccón check que asegura que nombreFase no sea null y no sea vacío';
 comment on constraint entrada_d3 on entrada is 'Restricción check que asegura que el costoBase no sea nulo y sea mayor o igual a 0';
 comment on constraint entrada_pkey on entrada is 'La llave primaria de la tabla entrada, es una llave compuesta que contiene a folio, nombreFase y idEvento';
-comment on constraint entrada_fkey1 on entrada is 'Llaves foráneas nombreFase que referencia a Fase y idEvento que referencia a evento, dichas llaves son a su vez primarias, pues forman una compuesta';
+comment on constraint entrada_fkey1 on entrada is 'Llaves foráneas nombreFase y idEvento que referencian a la tabla fase, dichas llaves son a su vez primarias, pues forman una compuesta';
 
 -- pais
 comment on table pais is 'Tabla que contiene la información de un país que participa en los JJOO';
