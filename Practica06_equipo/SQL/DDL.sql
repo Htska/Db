@@ -599,8 +599,7 @@ comment on column entrada.costoBase is 'El costo inicial de una entrada de un ev
 comment on constraint entrada_d1 on entrada is 'Restricción check que asegura que el folio no sea null y tenga una longitud de 20 caracteres';
 comment on constraint entrada_d2 on entrada is 'Restriccón check que asegura que nombreFase no sea null y no sea vacío';
 comment on constraint entrada_d3 on entrada is 'Restricción check que asegura que el costoBase no sea nulo y sea mayor o igual a 0';
-comment on constraint entrada_pkey on entrada is 'La llave primaria de la tabla entrada';
-comment on constraint entrada_fkey1 on entrada is 'Llave foránea de la tabla entrada, que hace referencia a la tabla fase';
+comment on constraint entrada_pkey on entrada is 'La llave primaria de la tabla entrada, es una llave compuesta que contiene a folio, nombreFase y idEvento';
 
 -- pais
 comment on table pais is 'Tabla que contiene la información de un país que participa en los JJOO';
