@@ -397,88 +397,81 @@ primary key (numeroPasaporte, correo);
 -- Llaves Foráneas 
 
 alter table atleta add constraint atleta_fkey
-foreign key (nombrePais) references pais(nombrePais);
+foreign key (nombrePais) references pais(nombrePais) on delete cascade on update cascade;
 
 alter table telefonoAtleta add constraint telefonoAtleta_fkey
-foreign key (numeroPasaporte) references atleta(numeroPasaporte);
+foreign key (numeroPasaporte) references atleta(numeroPasaporte) on delete cascade on update cascade;
 
 alter table correoAtleta add constraint correoAtleta_fkey
-foreign key (numeroPasaporte) references atleta(numeroPasaporte);
+foreign key (numeroPasaporte) references atleta(numeroPasaporte) on delete cascade on update cascade;
 
 alter table evento add constraint evento_fkey1
-foreign key (idLocalidad) references localidad(idLocalidad);
+foreign key (idLocalidad) references localidad(idLocalidad) on delete cascade on update cascade;
 
 alter table evento add constraint evento_fkey2
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina) on delete cascade on update cascade;
 
 alter table entrada add constraint entrada_fkey1
-foreign key (nombreFase, idEvento) references fase(nombreFase, idEvento); -- Foreign Key compuesta
+foreign key (nombreFase, idEvento) references fase(nombreFase, idEvento) on delete cascade on update cascade; -- Foreign Key compuesta
 
 alter table localidad add constraint localidad_fkey
-foreign key (nombrePais) references pais(nombrePais);
+foreign key (nombrePais) references pais(nombrePais) on delete cascade on update cascade;
 
 alter table medalla add constraint medalla_fkey1
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina) on delete cascade on update cascade;
 
 alter table medalla add constraint medalla_fkey2
-foreign key (numeroPasaporte) references atleta(numeroPasaporte);
+foreign key (numeroPasaporte) references atleta(numeroPasaporte) on delete cascade on update cascade;
 
 alter table telefonoJuez add constraint telefonoJuez_fkey
-foreign key (numeroPasaporte) references juez(numeroPasaporte);
+foreign key (numeroPasaporte) references juez(numeroPasaporte) on delete cascade on update cascade;
 
 alter table correoJuez add constraint correoJuez_fkey
-foreign key (numeroPasaporte) references juez(numeroPasaporte);
+foreign key (numeroPasaporte) references juez(numeroPasaporte) on delete cascade on update cascade;
 
 alter table fase add constraint fase_fkey
-foreign key (idEvento) references evento(idEvento);
+foreign key (idEvento) references evento(idEvento) on delete cascade on update cascade;
 
 alter table entrenador add constraint entrenador_fkey
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina) on delete cascade on update cascade;
 
 alter table telefonoEntrenador add constraint telefonoEntrenador_fkey
-foreign key (numeroPasaporte) references entrenador(numeroPasaporte);
+foreign key (numeroPasaporte) references entrenador(numeroPasaporte) on delete cascade on update cascade;
 
 alter table correoEntrenador add constraint correoEntrenador_fkey
-foreign key (numeroPasaporte) references entrenaalter table entrenador add constraint entrenador_fkey
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
-
-alter table telefonoEntrenador add constraint telefonoEntrenador_fkey
-foreign key (numeroPasaporte) references entrenador(numeroPasaporte);
-
-alter table correoEntrenador add constraint correoEntrenador_fkey
-foreign key (numeroPasaporte) references entrenador(numeroPasaporte);dor(numeroPasaporte);
+foreign key (numeroPasaporte) references entrenador (numeroPasaporte) on delete cascade on update cascade;
 
 -- 
 
 alter table practicar add constraint practicar_fkey1
-foreign key (numeroPasaporte) references atleta(numeroPasaporte);
+foreign key (numeroPasaporte) references atleta(numeroPasaporte) on delete cascade on update cascade;
 
 alter table practicar add constraint practicar_fkey2
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina) on delete cascade on update cascade;
 
 alter table participar add constraint participar_fkey1
-foreign key (numeroPasaporte) references atleta(numeroPasaporte);
+foreign key (numeroPasaporte) references atleta(numeroPasaporte) on delete cascade on update cascade;
 
 alter table participar add constraint participar_fkey2
-foreign key (idEvento) references evento(idEvento);
+foreign key (idEvento) references evento(idEvento) on delete cascade on update cascade;
 
 alter table patrocinar add constraint patrocinar_fkey1
-foreign key (nombrePatrocinador) references patrocinador(nombrePatrocinador);
+foreign key (nombrePatrocinador) references patrocinador(nombrePatrocinador) on delete cascade on update cascade;
 
 alter table patrocinar add constraint patrocinar_fkey2
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina) on delete cascade on update cascade;
 
 alter table supervisar add constraint supervisar_fkey1
-foreign key (numeroPasaporte) references juez(numeroPasaporte);
+foreign key (numeroPasaporte) references juez(numeroPasaporte) on delete cascade on update cascade;
 
 alter table supervisar add constraint supervisar_fkey2
-foreign key (nombreDisciplina) references disciplina(nombreDisciplina);
+foreign key (nombreDisciplina) references disciplina(nombreDisciplina) on delete cascade on update cascade;
 
 alter table entrenar add constraint entrenar_fkey1
-foreign key (numeroPasaporteE) references entrenador(numeroPasaporte);
+foreign key (numeroPasaporteE) references entrenador(numeroPasaporte) on delete cascade on update cascade;
 
 alter table entrenar add constraint entrenar_fkey2
-foreign key (numeroPasaporteA) references atleta(numeroPasaporte);
+foreign key (numeroPasaporteA) references atleta(numeroPasaporte) on delete cascade on update cascade;
 
 
 -- Comentarios 
@@ -657,7 +650,7 @@ comment on constraint correoJuez_fkey on correoJuez is 'Llave foránea de la tab
 comment on table fase is 'Tabla que contiene la información de una fase en los JJOO';
 comment on column fase.nombreFase is 'Nombre de la fase';
 comment on column fase.idEvento is 'Id del evento asociado a la fase';
-comment on constraint fase_d1 on juez is 'Restricción check que asegura que el nombre de la fase sea no vacía';
+comment on constraint fase_d1 on fase is 'Restricción check que asegura que el nombre de la fase sea no vacía';
 comment on constraint fase_pkey on fase is 'Llave primaria de la tabla fase, es una llave compuesta que contiene a nombreFase e IdEvento';
 comment on constraint fase_fkey on fase is 'Llave foránea de la tabla fase, hace referencia a la tabla evento';
 
@@ -667,3 +660,4 @@ comment on column supervisar.numeroPasaporte is 'Número del pasaporte del juez'
 comment on column supervisar.nombreDisciplina is 'Nombre de la disciplina';
 comment on constraint supervisar_fkey1 on supervisar is 'Llave foránea de la tabla supervisar, hace referencia a la tabla juez';
 comment on constraint supervisar_fkey2 on supervisar is 'Llave foránea de la tabla supervisar, hace referencia a la tabla disciplina';
+
