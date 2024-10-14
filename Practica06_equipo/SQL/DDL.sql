@@ -661,3 +661,42 @@ comment on column supervisar.nombreDisciplina is 'Nombre de la disciplina';
 comment on constraint supervisar_fkey1 on supervisar is 'Llave foránea de la tabla supervisar, hace referencia a la tabla juez';
 comment on constraint supervisar_fkey2 on supervisar is 'Llave foránea de la tabla supervisar, hace referencia a la tabla disciplina';
 
+-- entrenador
+comment on table entrenador is 'Tabla que contiene a los entrenadores que participan en los JJOO';
+comment on column entrenador.numeroPasaporte is 'Número del pasaporte del entrenador, es su identificador';
+comment on column entrenador.nombreDisciplina is 'Disciplina a la que pertenece el entrenador';
+comment on column entrenador.fechaNacimiento is 'Fecha de nacimiento del entrenador';
+comment on column entrenador.nacionalidad is 'Nacionalidad del entrenador';
+comment on column entrenador.nombre is 'Nombre del entrenador';
+comment on column entrenador.primerApellido is 'Primer apellido del entrenador';
+comment on column entrenador.segundoApellido is 'Segundo apellido del entrenador, si tiene';
+comment on constraint entrenador_d1 on entrenador is 'Restricción check que asegura que la longitud del número de pasaporte sea 10';
+comment on constraint entrenador_d2 on entrenador is 'Restricción check que asegura que la disciplina no es nula ni vacía';
+comment on constraint entrenador_d3 on entrenador is 'Restricción check que asegura que la nacionalidad no es vacía';
+comment on constraint entrenador_d4 on entrenador is 'Restricción check que asegura que el nombre del entrenador no sea vacío';
+comment on constraint entrenador_d5 on entrenador is 'Restricción check que asegura que el primer apellido del entrenador no sea vacío';
+comment on constraint entrenador_pkey on entrenador is 'La llave primaria de la tabla entrenador';
+comment on constraint entrenador_fkey on entrenador is 'La llave foránea de la tabla entrenador, hace referencia a la tabla disciplina';
+
+-- teléfonoEntrenador
+comment on table telefonoEntrenador is 'Tabla que contiene los teléfonos de los entrenadores';
+comment on column telefonoEntrenador.numeroPasaporte is 'Número del pasaporte del entrenador que tiene el télefono asociado';
+comment on column telefonoEntrenador.telefono is 'Número de télefono del entrenador';
+comment on constraint telefonoEntrenador_d1 on telefonoEntrenador is 'Restricción check que asegura que un telefono tiene longitud 10 y contiene únicamente números';
+comment on constraint telefonoEntrenador_pkey on telefonoEntrenador is 'La llave primaria de la tabla telefonoEntrenador';
+comment on constraint telefonoEntrenador_fkey on telefonoEntrenador is 'La llave foránea de la tabla telefonoEntrenador, hace refencia a la tabla entrenador';
+
+-- correoEntrenador
+comment on table correoEntrenador is 'Tabla que contiene los correos de los entrenadores';
+comment on column correoEntrenador.numeroPasaporte is 'Número del pasaporte del entrenador que tiene el correo asociado';
+comment on column correoEntrenador.correo is 'Correo del entrenador';
+comment on constraint correoEntrenador_d1 on correoEntrenador is 'Restricción check que asegura que un correo tenga una estructura correcta';
+comment on constraint correoEntrenador_pkey on correoEntrenador is 'La llave primaria de la tabla correoEntrenador';
+comment on constraint correoEntrenador_fkey on correoEntrenador is 'La llave foránea de la tabla correoEntrenador, hace referencia a la tabla entrenador';
+
+-- entrenar
+comment on table entrenar is 'Tabla que contiene la relación de entrenar entre un entrenador y un atleta';
+comment on column entrenar.numeroPasaporteE is 'Número del pasaporte del entrenador';
+comment on column entrenar.numeroPasaporteA is 'Número del pasaporte del atleta';
+comment on constraint entrenar_fkey1 on entrenar is 'Llave foránea de la tabla entrenar, hace referencia a la tabla entrenador';
+comment on constraint entrenar_fkey2 on entrenar is 'Llave foránea de la tabla entrenar, hace referencia a la tabla atleta';
