@@ -525,6 +525,7 @@ comment on column localidad.nombrePais is 'Nombre del pais donde se encuentra';
 comment on column localidad.calle  is  'Nombre de la calle en donde se encuentra';
 comment on column localidad.numero is 'Numero de la ubicación de la localidad';
 comment on column localidad.ciudad is 'Nombre de la ciudad donde se encuentra';
+comment on column localidad.tipo is 'El tipo de la localidad';
 comment on column localidad.nombre is 'Nombre de la localidad';
 comment on column localidad.aforo is 'Capacidad/Aforo que permite la localidad';
 comment on constraint localidad_d1 on localidad is 'Restricción check que asegura que el nombre del país de localidad no sea una cadena vacía. ';
