@@ -701,3 +701,6 @@ comment on column entrenar.numeroPasaporteE is 'Número del pasaporte del entren
 comment on column entrenar.numeroPasaporteA is 'Número del pasaporte del atleta';
 comment on constraint entrenar_fkey1 on entrenar is 'Llave foránea de la tabla entrenar, hace referencia a la tabla entrenador';
 comment on constraint entrenar_fkey2 on entrenar is 'Llave foránea de la tabla entrenar, hace referencia a la tabla atleta';
+
+-- modificación de tipo de la columna horaInicio de la tabla evento por time
+alter table evento alter column horaInicio type time;
