@@ -292,9 +292,6 @@ check (nombre <> '');
 alter table juez add constraint juez_d4
 check (primerApellido <> '');
 
-alter table juez add constraint juez_d5
-check (segundoApellido <> '');
-
 -- TeléfonoJuez
 alter table telefonoJuez add constraint telefonoJuez_d1
 check (telefono similar to '[0-9]{10}');
@@ -628,7 +625,6 @@ comment on constraint juez_d1 on juez is 'Restricción check que asegura que la 
 comment on constraint juez_d2 on juez is 'Restricción check que asegura que la nacionalidad no es vacía';
 comment on constraint juez_d3 on juez is 'Restricción check que asegura que el nombre del juez no sea vacío';
 comment on constraint juez_d4 on juez is 'Restricción check que asegura que el primer apellido del juez no sea vacío';
-comment on constraint juez_d5 on juez is 'Restricción check que asegura que el segundo apellido del juez no sea vacío';
 comment on constraint juez_pkey on juez is 'Llave primaria de la tabla juez';
 
 -- teléfonoJuez
