@@ -1,6 +1,6 @@
-package com.equipo.juegosolimpicos.dao;
+package com.equipo.juegosolimpicos.repository;
 
-import com.equipo.juegosolimpicos.entity.Disciplina;
+import com.equipo.juegosolimpicos.model.Disciplina;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class DisciplinaRepositoryImpl implements DisciplinaRepository {
     private static final String insertDisciplinaQuery = "insert into disciplina (nombreDisciplina, categoria) values (?, ?)";
-    private static final String updateDisciplinaByNombreDisciplinaQuery = "update disciplina set categoria=? where nombreDisciplina = ?";
+    private static final String updateDisciplinaByNombreDisciplinaQuery = "update disciplina set  categoria=? where nombreDisciplina = ?";
     private static final String getDisciplinaByNombreDisciplinaQuery = "select * from disciplina where nombreDisciplina = ?";
     private static final String deleteDisciplinaByNombreDisciplinaQuery = "delete from disciplina where nombreDisciplina = ?";
     private static final String getAllDisciplinasQuery = "select * from disciplina";

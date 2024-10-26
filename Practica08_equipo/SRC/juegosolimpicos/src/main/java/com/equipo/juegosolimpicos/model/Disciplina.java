@@ -1,4 +1,4 @@
-package com.equipo.juegosolimpicos.entity;
+package com.equipo.juegosolimpicos.model;
 
 public class Disciplina {
     private String nombreDisciplina;

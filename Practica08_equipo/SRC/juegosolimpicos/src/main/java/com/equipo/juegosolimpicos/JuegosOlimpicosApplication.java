@@ -2,12 +2,14 @@ package com.equipo.juegosolimpicos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-public class JuegosOlimpicosApplication {
+@RestController
+public class JuegosolimpicosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JuegosOlimpicosApplication.class, args);
+		SpringApplication.run(JuegosolimpicosApplication.class, args);
 	}
 
 }

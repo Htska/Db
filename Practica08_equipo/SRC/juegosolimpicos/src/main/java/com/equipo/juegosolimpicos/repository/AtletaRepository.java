@@ -1,6 +1,6 @@
-package com.equipo.juegosolimpicos.dao;
+package com.equipo.juegosolimpicos.repository;
 
-import com.equipo.juegosolimpicos.entity.Atleta;
+import com.equipo.juegosolimpicos.model.Atleta;
 
 import java.util.List;
 

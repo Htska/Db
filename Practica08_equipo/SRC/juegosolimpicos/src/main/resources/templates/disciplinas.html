@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Disciplinas</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div>
+    <h2>
+        Administrar Disciplinas
+    </h2>
+    </div>
+    <div class="my-3">
+        <form th:action="@{/disciplinas}" method="get" style="display: inline-block;">
+            <input type="text" name="nombreDisciplina" class="form-control d-inline-block w-auto" 
+                   placeholder="Buscar por Nombre de Disciplina" required minlength="1" maxlength="50"/>
+            <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+        </form>
+        <a th:if="${isSearch}" class="btn btn-secondary btn-sm ms-2" th:href="@{/disciplinas}">Mostrar Todas</a>
+        <a class="btn btn-primary btn-sm ms-3" th:href="@{/disciplinasAdd}">Añadir Disciplinas</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>NOMBRE DISCIPLINA</th>
+                <th>CATEGORÍA</th>
+                <th>OPERACIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="disciplina : ${listaDisciplinas}">
+                <tr>
+                    <td>[[${disciplina.nombreDisciplina}]]</td>
+                    <td>[[${disciplina.categoria}]]</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{'/disciplina/editar/' + ${disciplina.nombreDisciplina}}">Editar</a>
+                        <a class="btn btn-primary btn-sm" th:href="@{'/disciplina/eliminar/' + ${disciplina.nombreDisciplina}}">Eliminar</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
