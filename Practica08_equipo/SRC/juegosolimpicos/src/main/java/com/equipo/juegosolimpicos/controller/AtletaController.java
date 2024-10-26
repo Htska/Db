@@ -1,6 +1,7 @@
 package com.equipo.juegosolimpicos.controller;
 
 import com.equipo.juegosolimpicos.model.Atleta;
+import com.equipo.juegosolimpicos.repository.AtletaRepository;
 import com.equipo.juegosolimpicos.service.AtletaService;
 
 import java.util.List;
@@ -72,22 +73,40 @@ public class AtletaController {
         return "redirect:/atletas";
     }
 
-    /*
-     * // Hay que hacer un htlml para mostrar una sola disciplina y adaptar el
-     * método.
-     * 
-     * @GetMapping("/disciplina/{nombreDisciplina}")
-     * public Disciplina getDisciplina(@PathVariable("nombreDisciplina") String
-     * nombreDisciplina) {
-     * return disciplinaService.getDisciplinaByNombreDisciplina(nombreDisciplina);
-     * }
-     */
-
     // La versión anterior tenía
     // @DeleteMapping("/disciplina/eliminar/{nombreDisciplina}")
     @GetMapping("/atleta/eliminar/{numeroPasaporte}")
     public String deleteDisciplina(@PathVariable("numeroPasaporte") String numeroPasaporte) {
         atletaService.deleteAtletaByNumeroPasaporte(numeroPasaporte);
         return "redirect:/atletas";
+    }
+
+    // ----------------- Mappings para POSTMAN
+    @Autowired
+    AtletaRepository atletaRepository;
+
+    @PostMapping("/atletas/POSTMAN")
+    public Atleta addAtleta(@RequestBody Atleta atleta) {
+        return atletaRepository.saveAtleta(atleta);
+    }
+
+    @PutMapping("/atletas/POSTMAN")
+    public Atleta updateAtleta(@RequestBody Atleta atleta) {
+        return atletaRepository.updateAtleta(atleta);
+    }
+
+    @GetMapping("/atletas/POSTMAN/{numeroPasaporte}")
+    public Atleta getAtleta(@PathVariable("numeroPasaporte") String numeroPasaporte) {
+        return atletaRepository.getAtletaByNumeroPasaporte(numeroPasaporte);
+    }
+
+    @DeleteMapping("/atletas/POSTMAN/{numeroPasaporte}")
+    public String deleteAtleta(@PathVariable("numeroPasaporte") String numeroPasaporte) {
+        return atletaRepository.deleteAtletaByNumeroPasaporte(numeroPasaporte);
+    }
+
+    @GetMapping("/atletas/POSTMAN")
+    public List<Atleta> getAtletas() {
+        return atletaRepository.getAllAtletas();
     }
 }

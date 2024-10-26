@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Juegos Olímpicos 2028</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .container-title {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #343a40;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+        .link-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .link-container a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="container-fluid text-center">
-    <h1>
-        Selecciona la relación
-    </h1>
-        <a class="h2" th:href="@{/disciplinas}">Relación Disciplina</a>
+    <div class="container-title text-center">
+        <h1>Selecciona la relación</h1>
     </div>
+    
+    <div class="link-container">
+        <a class="btn btn-primary btn-lg" th:href="@{/disciplinas}">Relación Disciplina</a>
+        <a class="btn btn-secondary btn-lg" th:href="@{/atletas}">Relación Atleta</a>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
