@@ -1,9 +1,11 @@
 package com.equipo.juegosolimpicos.model;
 
+import java.time.LocalDate;
+
 public class Atleta {
     private String numeroPasaporte;
     private String nombrePais;
-    private String fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String nacionalidad;
     private String nombre;
     private String primerApellido;
@@ -15,7 +17,7 @@ public class Atleta {
 
     public Atleta(String numeroPasaporte,
             String nombrePais,
-            String fechaNacimiento,
+            LocalDate fechaNacimiento,
             String nacionalidad,
             String nombre,
             String primerApellido,
@@ -47,11 +49,11 @@ public class Atleta {
         this.nombrePais = nombrePais;
     }
 
-    public String getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
