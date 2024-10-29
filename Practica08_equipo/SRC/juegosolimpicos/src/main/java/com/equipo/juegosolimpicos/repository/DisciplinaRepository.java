@@ -26,16 +26,14 @@ public interface DisciplinaRepository {
     /**
      * Selecciona y regresa la disciplina con el nombre dado. 
      * @param nombreDisciplina El nombre de la disciplina a buscar.
-     * @return Disciplina Si existe, la disciplina con el nombre dado.
-     *         Regresa null si dicha disciplina no existe.
+     * @return Disciplina La disciplina con el nombre dado.
      */
     Disciplina getDisciplinaByNombreDisciplina(String nombreDisciplina);
     
     /** 
      * Elimina la disciplina con el nombre dado.
      * @param nombreDisciplina El nombre de la disciplina a eliminar.
-     * @return String Mensaje que confirma la eliminación de la disciplina 
-     *         con el nombre dado.
+     * @return String Mensaje que confirma la eliminación de la disciplina.
      */
     String deleteDisciplinaByNombreDisciplina(String nombreDisciplina);
     

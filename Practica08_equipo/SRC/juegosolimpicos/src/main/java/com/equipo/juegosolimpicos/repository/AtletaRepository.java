@@ -26,16 +26,14 @@ public interface AtletaRepository {
     /** 
      * Selecciona el atleta con el número de pasaporte dado.
      * @param numeroPasaporte El número de pasaporte que tiene el atleta.
-     * @return Atleta Si existe, el atleta con el número de pasaporte dado.
-     *         Regresa null si dicho atleta no existe.
+     * @return Atleta El atleta con el número de pasaporte dado.
      */
     Atleta getAtletaByNumeroPasaporte(String numeroPasaporte);
     
     /** 
      * Elimina el atleta con el número de pasaporte dado.
      * @param numeroPasaporte El número de pasaporte que tiene el atleta.
-     * @return String Mensaje que confirma la eliminación del atleta con el 
-     *         número de pasaporte dado.
+     * @return String Mensaje que confirma la eliminación del atleta.
      */
     String deleteAtletaByNumeroPasaporte(String numeroPasaporte);
     
