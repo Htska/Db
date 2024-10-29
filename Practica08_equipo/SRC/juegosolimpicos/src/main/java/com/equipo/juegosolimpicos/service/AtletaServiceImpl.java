@@ -54,7 +54,8 @@ public class AtletaServiceImpl implements AtletaService {
     /** 
      * Elimina el atleta con el número de pasaporte dado.
      * @param numeroPasaporte El número de pasaporte que tiene el atleta.
-     * @return String Mensaje que confirma la eliminación.
+     * @return String Mensaje que confirma la eliminación del atleta con 
+     *         el número de pasaporte dado.
      */
     @Override
     public String deleteAtletaByNumeroPasaporte(String numeroPasaporte) {
