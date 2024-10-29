@@ -14,9 +14,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 // Controller sirve para regresar los htmls, si se usara RestController regresaría cadenas
 @Controller
 public class DisciplinaController {
+    // Inyectamos el servicio de disciplina
     @Autowired
     DisciplinaService disciplinaService;
 
+    /**
+     * Método para obtener las disciplinas, si se recibe un nombre de disciplina se
+     * obtiene dicha disciplina, en otro caso se buscan todas las disciplinas. Este
+     * método se utiliza para la interfaz de thymeleaf.
+     * 
+     * @param nombreDisciplina nombre de la disciplina que se desea obtener.
+     *                         Opcional
+     * @param model            El modelo que se utilizará para enviar los datos a la
+     *                         vista
+     * @return La vista de disciplinas el cual está definido como disciplinas.html.
+     */
     @GetMapping("/disciplinas")
     public String listDisciplinas(@RequestParam(value = "nombreDisciplina", required = false) String nombreDisciplina,
             Model model) {
@@ -37,8 +49,13 @@ public class DisciplinaController {
         return "disciplinas";
     }
 
-    // Funciona pero no puedo cambiar la url a /Disciplina/añadir sin que de un
-    // error
+    /**
+     * Método para mostrar el formulario de añadir disciplina
+     * 
+     * @param model El modelo que se utilizará para enviar los datos a la vista
+     * @return La vista de disciplinasAdd el cual está definido como
+     *         disciplinasAdd.html.
+     */
     @GetMapping("/disciplinasAdd")
     public String showNewForm(Model model) {
         model.addAttribute("disciplina", new Disciplina());
@@ -46,6 +63,14 @@ public class DisciplinaController {
         return "disciplinasAdd";
     }
 
+    /**
+     * Método para añadir una disciplina
+     * 
+     * @param disciplina         La disciplina que se desea añadir, debe de cumplir
+     *                           con el modelo especificado.
+     * @param redirectAttributes Atributos que se enviarán a la vista.
+     * @return Vista de disciplinas.
+     */
     @PostMapping("/disciplinas/save")
     public String addDisciplina(@ModelAttribute Disciplina disciplina, RedirectAttributes redirectAttributes) {
         disciplinaService.saveDisciplina(disciplina);
@@ -53,6 +78,16 @@ public class DisciplinaController {
         return "redirect:/disciplinas";
     }
 
+    /**
+     * Método para mostrar el formulario de editar disciplina
+     * 
+     * @param nombreDisciplina El nombre de la disciplina que se desea editar. (Se
+     *                         tomará como parte de PathVariable)
+     * @param model            El modelo que se utilizará para enviar los datos a la
+     *                         vista
+     * @return La vista de disciplinasEdit el cual está definido como
+     *         disciplinasEdit.html.
+     */
     @GetMapping("/disciplina/editar/{nombreDisciplina}")
     public String showEditForm(@PathVariable("nombreDisciplina") String nombreDisciplina, Model model) {
         try {
@@ -65,7 +100,14 @@ public class DisciplinaController {
         }
     }
 
-    // La versión anterior tenía @PutMapping
+    /**
+     * Método para editar una disciplina
+     * 
+     * @param disciplina         La disciplina que se desea editar, debe de cumplir
+     *                           con el modelo especificado.
+     * @param redirectAttributes Atributos que se enviarán a la vista.
+     * @return Vista de disciplinas.
+     */
     @PostMapping("/disciplinas/guardar")
     public String updateDisciplina(@ModelAttribute Disciplina disciplina, RedirectAttributes redirectAttributes) {
         disciplinaService.updateDisciplina(disciplina);
@@ -73,19 +115,13 @@ public class DisciplinaController {
         return "redirect:/disciplinas";
     }
 
-    /*
-     * // Hay que hacer un htlml para mostrar una sola disciplina y adaptar el
-     * método.
+    /**
+     * Método para eliminar una disciplina
      * 
-     * @GetMapping("/disciplina/{nombreDisciplina}")
-     * public Disciplina getDisciplina(@PathVariable("nombreDisciplina") String
-     * nombreDisciplina) {
-     * return disciplinaService.getDisciplinaByNombreDisciplina(nombreDisciplina);
-     * }
+     * @param nombreDisciplina El nombre de la disciplina que se desea eliminar.(Se
+     *                         tomará como parte de PathVariable)
+     * @return Vista de disciplinas.
      */
-
-    // La versión anterior tenía
-    // @DeleteMapping("/disciplina/eliminar/{nombreDisciplina}")
     @GetMapping("/disciplina/eliminar/{nombreDisciplina}")
     public String deleteDisciplina(@PathVariable("nombreDisciplina") String nombreDisciplina) {
         disciplinaService.deleteDisciplinaByNombreDisciplina(nombreDisciplina);
