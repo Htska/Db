@@ -53,7 +53,7 @@ public class AtletaRepositoryImpl implements AtletaRepository {
      * Selecciona el atleta con el número de pasaporte dado.
      * @param numeroPasaporte El número de pasaporte que tiene el atleta.
      * @return Atleta Si existe, el atleta con el número de pasaporte dado.
-     *         Null si dicho atleta no existe.
+     *         Regresa null si dicho atleta no existe.
      */
     @Override
     public Atleta getAtletaByNumeroPasaporte(String numeroPasaporte) {
@@ -68,7 +68,8 @@ public class AtletaRepositoryImpl implements AtletaRepository {
     /** 
      * Elimina el atleta con el número de pasaporte dado.
      * @param numeroPasaporte El número de pasaporte que tiene el atleta.
-     * @return String Mensaje que confirma la eliminación.
+     * @return String Mensaje que confirma la eliminación del atleta con el 
+     *         número de pasaporte dado.
      */
     @Override
     public String deleteAtletaByNumeroPasaporte(String numeroPasaporte) {
