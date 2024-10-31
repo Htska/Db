@@ -13571,3 +13571,6 @@ insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) val
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (148, 'Volleyball', '5VTDW2VTYV', 'Bronce');
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (149, 'Water Polo', '5WYAIB85FU', 'Bronce');
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (150, 'Weightlifting', '5WZQYX5F5H', 'Bronce');
+insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (151, 'Weightlifting', '051HEFSZGT', 'Bronce');
+insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (152, 'Weightlifting', '17M0AA4OSU', 'Plata');
+insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (153, 'Weightlifting', '6CVTEAFKQ2', 'Oro');
