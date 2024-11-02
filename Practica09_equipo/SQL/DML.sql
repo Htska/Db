@@ -1537,6 +1537,12 @@ insert into atleta (numeroPasaporte, nombrePais, fechaNacimiento, nacionalidad, 
 insert into atleta (numeroPasaporte, nombrePais, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido, genero) values ('ZWW4Y13NRK', 'Japan', '9/15/1984', 'Greece', 'Cliff', 'Meekings', 'Surpliss', 'M');
 
 -- Entrenador
+-- inserciones
+insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('KIYPESFYT9', 'Archery', '10/31/1979', 'Japan', 'Cullen', 'Cuthill', 'Tabard');
+insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('KIYTQSFYT9', 'Baseball Softball', '10/31/1979', 'Mexico', 'Raul', 'Oldham', 'Tabard');
+insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('P34PESFYT9', 'Tennis', '10/31/1979', 'Spain', 'Joaquin', 'Wyley', 'Tabard');
+
+--
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('KIYSESFYT9', 'Archery', '10/31/1979', 'Japan', 'Cullen', 'Gircke', 'Tabard');
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('1J8K3BLE4G', 'Artistic Gymnastics', '6/22/1978', 'Mexico', 'Louie', 'Raisher', 'Tellenbroker');
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('TK4HD8W1XR', 'Artistic Swimming', '5/9/1978', 'Mexico', 'Krissie', 'Wailes', 'Danzey');
@@ -9457,6 +9463,14 @@ insert into entrenar (numeroPasaporteA, numeroPasaporteE) values ('ZU5UANZ0S4', 
 insert into entrenar (numeroPasaporteA, numeroPasaporteE) values ('ZWW4Y13NRK', 'NJEL09GRJT');
 
 -- Practicar
+-- Se agregan para las consultas
+insert into practicar (numeroPasaporte, nombreDisciplina) values ('03CAULV0NP', 'Athletics');
+insert into practicar (numeroPasaporte, nombreDisciplina) values ('03CAULV0NP', 'Basketball');
+insert into practicar (numeroPasaporte, nombreDisciplina) values ('3DUT8Q59Y4', 'Swimming');
+insert into practicar (numeroPasaporte, nombreDisciplina) values ('3XIV521KW5', 'Table Tennis');
+insert into practicar (numeroPasaporte, nombreDisciplina) values ('42CY3L5JXA', 'Golf');
+insert into practicar (numeroPasaporte, nombreDisciplina) values ('7MST4LG8PE', 'Diving');
+--
 insert into practicar (numeroPasaporte, nombreDisciplina) values ('03CAULV0NP', 'Archery');
 insert into practicar (numeroPasaporte, nombreDisciplina) values ('0457XEBS6A', 'Artistic Gymnastics');
 insert into practicar (numeroPasaporte, nombreDisciplina) values ('04V3ZGVFAC', 'Artistic Swimming');
