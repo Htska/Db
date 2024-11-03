@@ -1541,6 +1541,9 @@ insert into atleta (numeroPasaporte, nombrePais, fechaNacimiento, nacionalidad, 
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('KIYPESFYT9', 'Archery', '10/31/1979', 'Japan', 'Cullen', 'Cuthill', 'Tabard');
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('KIYTQSFYT9', 'Baseball Softball', '10/31/1979', 'Mexico', 'Raul', 'Oldham', 'Tabard');
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('P34PESFYT9', 'Tennis', '10/31/1979', 'Spain', 'Joaquin', 'Wyley', 'Tabard');
+insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('FLOYTE5YDI', 'Table Tennis', '7/30/1974', 'Japan', 'Darlene', 'Blannin', 'Inkpin');
+insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('FLOTYE$YDI', 'Modern Pentathlon', '7/30/1974', 'India', 'Darlene', 'Vickar', 'Inkpin');
+
 
 --
 insert into entrenador (numeroPasaporte, nombreDisciplina, fechaNacimiento, nacionalidad, nombre, primerApellido, segundoApellido) values ('KIYSESFYT9', 'Archery', '10/31/1979', 'Japan', 'Cullen', 'Gircke', 'Tabard');

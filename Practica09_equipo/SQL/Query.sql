@@ -1,17 +1,10 @@
 --1
-(select a.numeropasaporte, a.fechanacimiento , a.nacionalidad, a.nombre, a.primerapellido, 
-a.segundoapellido
+(select a.primerapellido, a.numeropasaporte as pasaporteAtleta, e.numeropasaporte as pasaporteEntrenador,
+a.nombredisciplina as disciplina, a.nombre as nombreAtleta, e.nombre as nombreEntrenador, a.nacionalidad as nacionalidadAtleta
+, e.nacionalidad as nacionalidaEntrenador
 from (atleta natural join practicar) as a join entrenador e 
 on (a.primerapellido = e.primerapellido and a.nombredisciplina = e.nombredisciplina)
-order by a.primerapellido)
-
-union
-
-(select e.numeropasaporte, e.fechanacimiento , e.nacionalidad, e.nombre, e.primerapellido, 
-e.segundoapellido
-from (atleta natural join practicar) as a join entrenador e 
-on (a.primerapellido = e.primerapellido and a.nombredisciplina = e.nombredisciplina)
-order by e.primerapellido);
+order by a.primerapellido);
 
 
 --2
@@ -25,7 +18,7 @@ select *
 from  (select numeropasaporte,count(nombredisciplina) as disciplinas
 	from
 	(select distinct numeropasaporte,nombredisciplina
-	from atleta natural join practicar natural join evento)
+	from atleta natural join participar natural join evento)
 	group by numeropasaporte) natural join atleta
 where disciplinas>1;
 
