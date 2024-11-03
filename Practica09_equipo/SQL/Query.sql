@@ -24,23 +24,16 @@ where disciplinas>1;
 
 --4 
 
--- Tabla temporal para jueces con información de la disciplina y evento.
-create temp table juezDisciplina as 
-select j.numeropasaporte as pasaporteJuez, j.nacionalidad, e.idevento, s.nombredisciplina as disciplinaJuez 
-from juez j
-join supervisar s on j.numeropasaporte = s.numeropasaporte
-join evento e on e.nombredisciplina = s.nombredisciplina
-
---Tabla temporal para entrenadores con información de evento.
-create temp table entrenadorDisciplina as 
-select e.numeropasaporte as entrenadorPasaporte, e.nacionalidad, ev.idevento, e.nombredisciplina as disciplinaEntrenador
+(select j.numeropasaporte, j.nacionalidad,'Juez' AS puesto,j.nombredisciplina,  j.nombre, j.primerapellido, j.segundoapellido
+from (juez natural join supervisar) j)
+union
+(select e.numeropasaporte, e.nacionalidad,'Entrenador' AS puesto,e.nombredisciplina, e.nombre, e.primerapellido, e.segundoapellido 
 from entrenador e 
-join evento ev on ev.nombredisciplina = e.nombredisciplina
-
-select distinct jd.pasaporteJuez, jd.idevento, ed.entrenadorPasaporte, ed.idevento
-from juezDisciplina jd
-join entrenadorDisciplina ed ON jd.nacionalidad = ed.nacionalidad
-where jd.idevento <> ed.idevento;
+LEFT JOIN (juez natural join supervisar) js 
+ON e.nacionalidad = js.nacionalidad 
+   AND e.nombredisciplina = js.nombredisciplina
+WHERE js.numeropasaporte IS NULL)
+order by nacionalidad
 
 
 --5
