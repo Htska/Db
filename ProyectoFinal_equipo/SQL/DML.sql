@@ -12719,6 +12719,9 @@ insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) valu
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('UI88-ixxqyz0df3-8259', 'Fase 2', 81, 969, 2037);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('VN38-dw97imkuzi-2578', 'Fase 2', 82, 734, 1197);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('IX28-3txsgmu1y7-1783', 'Fase 2', 83, 165, 2593);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-53Y7', 'Fase 1', 1, 28, 1219);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('QK38-4e6rokyrp4-1KL6', 'Fase 1', 19, 85, 2468);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('QK38-4e6rojyrp4-1KL6', 'Fase 1', 19, 84, 2468);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('AL68-pdhbekt8wt-5721', 'Fase 2', 84, 270, 1448);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('KF46-5elf221mpj-5217', 'Fase 2', 85, 368, 1171);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('NQ86-10y95kqx8x-4599', 'Fase 2', 86, 121, 1122);
