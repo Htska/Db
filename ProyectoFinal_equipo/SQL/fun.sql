@@ -60,3 +60,45 @@ select * from capacidadRestante(1);
 -- Localidad inválida
 select * from capacidadRestante(200);
 
+
+
+
+
+--------- DISPARADORES ----------
+
+--DISPARADOR 1
+-- Disparador que revisa que no se exceda el aforo de la localidad, regresando una excepción si sucede el caso anterior.
+-- Se utiliza una función definida previamente llamada capacidadRestante() para poder obtener la capacidad de la localidad a revisar.
+create or replace function revisarDisponibilidad()
+returns trigger as $$
+declare 
+	targetLocalidad int; 
+	capacidadRestante int;
+begin 
+		select idLocalidad into targetLocalidad
+		from evento 
+		where idEvento = new.idEvento;
+		
+		select lugaresDisponibles into capacidadRestante
+		from capacidadRestante(targetLocalidad);
+		-- Revisamos si aún hay capacidad suficiente.
+		if capacidadRestante <= 0 then 
+			raise exception 'Se ha alcanzado la capacidad máxima de la localidad especificada.';
+		end if;
+		
+		return new;
+end
+$$ language plpgsql;
+
+-- Asignamos el disparador a entrada, este se activa antes de insertar o actualizar.
+create trigger checkDisponibilidadTrigger
+before insert or update on entrada
+for each row
+execute function revisarDisponibilidad();
+
+-- Se creó una localidad con aforo de 4 y sus resoectivas entidades necesarias para poder insertar entradas a ella. Dicha localidad se encuentra con capacidad máxima. Podemos probar el uso del trigger con:
+-- Revisamos las entradas actuales, son 4.
+select * from entrada 
+where idevento = 444
+-- Inserción cuando se excede la capacidad, regresará la excepción.
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0005', 'Fase 2', 444, 287, 100);

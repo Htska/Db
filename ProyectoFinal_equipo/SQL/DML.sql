@@ -10828,6 +10828,7 @@ insert into localidad (idLocalidad, nombrePais, calle, numero, ciudad, nombre, t
 insert into localidad (idLocalidad, nombrePais, calle, numero, ciudad, nombre, tipo, aforo) values (148, 'Vietnam', 'Mayfield', '6', 'Rāwandūz', 'Synergistic', 'Persevering', 9288);
 insert into localidad (idLocalidad, nombrePais, calle, numero, ciudad, nombre, tipo, aforo) values (149, 'Tonga', 'Hoffman', '12', 'New Pandanon', 'dedicated', 'Adaptive', 681);
 insert into localidad (idLocalidad, nombrePais, calle, numero, ciudad, nombre, tipo, aforo) values (150, 'Nicaragua', 'Hansons', '3228', 'Cayambe', 'modular', 'concept', 5851);
+insert into localidad (idLocalidad, nombrePais, calle, numero, ciudad, nombre, tipo, aforo) values (444, 'United States', 'S Figueroa St', 391, 'Los Angeles', 'Los Sant', 'centro', 4);
 
 -- Evento
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (1, 1, 'Archery', '7/20/2028', '11:18', 4);
@@ -11030,6 +11031,7 @@ insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, 
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (198, 18, 'Volleyball', '7/15/2028', '6:29', 5);
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (199, 19, 'Water Polo', '7/19/2028', '10:05', 4);
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (200, 20, 'Weightlifting', '7/24/2028', '7:47', 3);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (444, 444, 'Archery', '7/20/2028', '11:18', 4);
 
 -- Participar
 insert into participar (numeroPasaporte, idEvento) values ('03CAULV0NP', 1);
@@ -12333,6 +12335,7 @@ insert into fase (nombreFase, idEvento) values ('Fase 2', 96);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 97);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 98);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 99);
+insert into fase (nombreFase, idEvento) values ('Fase 2', 444);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 100);
 insert into fase (nombreFase, idEvento) values ('Fase 3', 101);
 insert into fase (nombreFase, idEvento) values ('Fase 3', 102);
@@ -12434,6 +12437,7 @@ insert into fase (nombreFase, idEvento) values ('Fase 4', 197);
 insert into fase (nombreFase, idEvento) values ('Fase 4', 198);
 insert into fase (nombreFase, idEvento) values ('Fase 4', 199);
 insert into fase (nombreFase, idEvento) values ('Fase 4', 200);
+
 
 -- Entrada
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-5387', 'Fase 1', 1, 283, 1219);
@@ -13439,7 +13443,10 @@ insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) valu
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('UV23-poxt8sop55-0114', 'Fase 4', 198, 903, 2148);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('AX92-h14pwrpcuf-5448', 'Fase 4', 199, 343, 1199);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ED95-7ymk9g55kw-0333', 'Fase 4', 200, 906, 1031);
-
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0001', 'Fase 2', 444, 283, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0002', 'Fase 2', 444, 284, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0003', 'Fase 2', 444, 285, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0004', 'Fase 2', 444, 286, 100);
 -- Medalla
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (1, 'Archery', '03CAULV0NP', 'Oro');
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (2, 'Artistic Gymnastics', '0457XEBS6A', 'Oro');
