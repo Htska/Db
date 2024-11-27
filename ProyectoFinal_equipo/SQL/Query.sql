@@ -37,3 +37,58 @@ select nombreDisciplina, count(folio) as boletos
 from disciplina d natural join evento e natural join fase natural join entrada e2 
 group by nombredisciplina) natural join supervisar s  natural join juez j
 order by boletos desc;
+
+
+-- CONSULTA 4
+
+-- Información de las localidades que más han sido utilizadas en fase 4 ordenadas por uso y aforo
+
+select *
+from (
+    select idLocalidad, count(*) as numeroUsos
+    from evento 
+    natural join (
+        select idLocalidad, idEvento
+        from fase
+        natural join evento
+        where nombreFase = 'Fase 4')
+    group by idLocalidad)
+natural join localidad 
+order by numeroUsos desc, aforo desc;
+
+--CONSULTA 5
+
+-- Disciplinas con mas patrocinadores que tienen el mayor número de espectadores presenciales.
+
+-- Creamos 2 Tablas temporales que guarden el resultado de obtener el numero de patrocinadores que tiene una disciplina y otra que guarde el numero de espectadores que tiene una disciplina
+
+--tabla con el numero de patrocinadores
+with numeroPatrocinadores as (
+    select nombreDisciplina, count(nombrePatrocinador) as numeroPatrocinadores
+    from patrocinar
+    natural join disciplina
+    group by nombreDisciplina
+),
+--tabla con el numero de espectadores
+numeroEspectadores as (
+    select nombreDisciplina, count(folio) as numeroEspectadores
+    from entrada
+    natural join evento
+    group by nombreDisciplina
+)
+-- Query
+select d.nombreDisciplina, 
+       p.numeroPatrocinadores, 
+       e.numeroEspectadores
+from disciplina d
+--Realizamos inner join para incluir únicamente a las disciplinas con patrocinadores y espectadores.
+inner join numeroPatrocinadores p on d.nombreDisciplina = p.nombreDisciplina
+inner join numeroEspectadores e on d.nombreDisciplina = e.nombreDisciplina
+ORDER BY numeroPatrocinadores DESC, numeroEspectadores DESC;
+
+--CONSULTA 6
+
+-- Eventos que se realizan fuera de Los Angeles pero dentro de Estados Unidos
+select idEvento, nombreDisciplina, nombre, ciudad, fecha
+from localidad natural join evento
+where nombrePais = 'United States' and ciudad <> 'Los Angeles'
