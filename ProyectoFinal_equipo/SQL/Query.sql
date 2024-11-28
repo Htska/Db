@@ -92,3 +92,46 @@ ORDER BY numeroPatrocinadores DESC, numeroEspectadores DESC;
 select idEvento, nombreDisciplina, nombre, ciudad, fecha
 from localidad natural join evento
 where nombrePais = 'United States' and ciudad <> 'Los Angeles'
+
+--CONSULTA 7
+
+-- La información de los eventos que se llevan a cabo en la localidad con mayor cantidad de eventos, ordenados de acuerdo a su fecha de inicio
+
+select idEvento, evento.idLocalidad, nombreDisciplina, fecha, horaInicio from  (
+  select max(num_eventos)
+  from (select idLocalidad, count(idEvento) as num_eventos
+        from evento
+            group by idLocalidad)) as m join (select idLocalidad, count(idEvento) as num_eventos
+        from evento
+            group by idLocalidad) as a on m.max = a.num_eventos join evento on a.idLocalidad = evento.idlocalidad 
+order by fecha asc;
+
+--CONSULTA 8
+
+-- Países de acuerdo al número de atletas que los representan, ordenados de mayor a menor
+
+select pais.nombrePais, count(numeroPasaporte) as atletas_representados 
+from atleta right join pais on atleta.nombrepais = pais.nombrepais 
+group by pais.nombrePais
+order by atletas_representados desc;
+
+-- CONSULTA 9
+-- Cada disciplina practicada y el género predominante en ella, ordenados por el nombre de la disciplina
+
+-- Se crean dos tablas temporales, donde la primera guarda cada disciplina, el género y el total de atletas de ese género
+-- y la segunda guarda el máximo entre estos dos totales por género
+
+with numeroGeneros as (
+select nombreDisciplina, genero, count(genero) as numeroGen
+from practicar natural join atleta 
+group by nombreDisciplina, genero),
+
+predominante as (
+    select nombreDisciplina, max(numeroGen) as maxG
+    from numeroGeneros
+    group by nombreDisciplina
+    order by nombreDisciplina
+)
+select predominante.nombreDisciplina, genero as genero_predominante
+from predominante join numeroGeneros on numeroGen = maxG and predominante.nombreDisciplina = numeroGeneros.nombreDisciplina
+order by predominante.nombreDisciplina;
