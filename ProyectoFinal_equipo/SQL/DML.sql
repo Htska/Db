@@ -11032,7 +11032,18 @@ insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, 
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (199, 19, 'Water Polo', '7/19/2028', '10:05', 4);
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (200, 20, 'Weightlifting', '7/24/2028', '7:47', 3);
 insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (444, 444, 'Archery', '7/20/2028', '11:18', 4);
-
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (999, 444, 'Squash', '7/20/2028', '12:48', 4);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (201, 118, 'Archery', '7/24/2028', '13:00', 4);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (202, 118, 'Swimming', '7/23/2028', '17:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (203, 140, 'Swimming', '7/21/2028', '17:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (204, 140, 'Swimming', '7/22/2028', '17:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (205, 146, 'Archery', '7/22/2028', '13:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (206, 137, 'Boxing', '7/23/2028', '13:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (208, 136, 'Athletics', '7/24/2028', '13:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (209, 135, 'Cricket', '7/25/2028', '13:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (210, 134, 'Breaking', '7/24/2028', '13:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (211, 133, 'Judo', '7/20/2028', '13:00', 2);
+insert into evento (idEvento, idLocalidad, nombreDisciplina, fecha, horaInicio, duracionMaxima) values (212, 132, 'Lacrosse', '7/21/2028', '13:00', 2);
 -- Participar
 insert into participar (numeroPasaporte, idEvento) values ('03CAULV0NP', 1);
 insert into participar (numeroPasaporte, idEvento) values ('03CAULV0NP', 199);
@@ -12335,7 +12346,6 @@ insert into fase (nombreFase, idEvento) values ('Fase 2', 96);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 97);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 98);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 99);
-insert into fase (nombreFase, idEvento) values ('Fase 2', 444);
 insert into fase (nombreFase, idEvento) values ('Fase 2', 100);
 insert into fase (nombreFase, idEvento) values ('Fase 3', 101);
 insert into fase (nombreFase, idEvento) values ('Fase 3', 102);
@@ -12437,6 +12447,19 @@ insert into fase (nombreFase, idEvento) values ('Fase 4', 197);
 insert into fase (nombreFase, idEvento) values ('Fase 4', 198);
 insert into fase (nombreFase, idEvento) values ('Fase 4', 199);
 insert into fase (nombreFase, idEvento) values ('Fase 4', 200);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 444);
+insert into fase (nombreFase, idEvento) values ('Fase 2', 999);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 201);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 202);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 203);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 204);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 205);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 206);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 208);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 209);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 210);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 211);
+insert into fase (nombreFase, idEvento) values ('Fase 4', 212);
 
 
 -- Entrada
@@ -13443,10 +13466,12 @@ insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) valu
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('UV23-poxt8sop55-0114', 'Fase 4', 198, 903, 2148);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('AX92-h14pwrpcuf-5448', 'Fase 4', 199, 343, 1199);
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ED95-7ymk9g55kw-0333', 'Fase 4', 200, 906, 1031);
-insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0001', 'Fase 2', 444, 283, 100);
-insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0002', 'Fase 2', 444, 284, 100);
-insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0003', 'Fase 2', 444, 285, 100);
-insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0004', 'Fase 2', 444, 286, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0001', 'Fase 4', 444, 283, 1000);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0002', 'Fase 4', 444, 284, 1000);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0003', 'Fase 2', 999, 285, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0004', 'Fase 2', 999, 286, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0005', 'Fase 2', 999, 287, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0006', 'Fase 2', 999, 288, 100);
 -- Medalla
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (1, 'Archery', '03CAULV0NP', 'Oro');
 insert into medalla (numeroMedalla, nombreDisciplina, numeroPasaporte, tipo) values (2, 'Artistic Gymnastics', '0457XEBS6A', 'Oro');

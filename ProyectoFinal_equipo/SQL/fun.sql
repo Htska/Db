@@ -31,21 +31,22 @@ select * from medallero() as (Pais varchar, Oro bigint, Plata bigint, Bronce big
 
 -- función que regresa la capacidad restante de una localidad si se especifica su id, en otro caso regresa la capacidad restante de todas las localidades.
 create or replace function capacidadRestante(idLocalidadS integer default null) 
-returns table (idLocalidad int, nombre varchar(50), lugaresDisponibles int) as $$
+returns table (idLocalidad int, nombre varchar(50), idEvento int, fecha date, lugaresDisponibles int) as $$
 begin
-	-- Revisamos que el idLocalidadS  (si es proporcionado) sea válido 
+
 	if idLocalidadS is not null then
 		if not exists (select * from localidad l where l.idLocalidad = idLocalidadS) then
 			raise exception 'idLocalidad inválido, la localidad con id % no existe', idLocalidadS;
 		end if;
 	end if;
-	-- Regresamos el query
+
 	return query
-	select l.idLocalidad, l.nombre, 
+	select l.idLocalidad, l.nombre, e.idEvento, e.fecha,  
 		l.aforo-(select count(folio):: integer 
-		from entrada natural join evento e
-		where e.idLocalidad = l.idLocalidad) as lugaresDisponibles
+		from entrada en 
+		where en.idEvento = e.idEvento) as lugaresDisponibles
 	from localidad l
+	join evento e on l.idLocalidad = e.idLocalidad
 	where idLocalidadS is null or l.idLocalidad = idLocalidadS;
 end;									
 $$ 
@@ -78,10 +79,13 @@ begin
 		select idLocalidad into targetLocalidad
 		from evento 
 		where idEvento = new.idEvento;
+
+		select lugaresDisponibles
+		into capacidadRestante
+		from capacidadRestante(targetLocalidad)
+		where idEvento = new.idEvento;
+	
 		
-		select lugaresDisponibles into capacidadRestante
-		from capacidadRestante(targetLocalidad);
-		-- Revisamos si aún hay capacidad suficiente.
 		if capacidadRestante <= 0 then 
 			raise exception 'Se ha alcanzado la capacidad máxima de la localidad especificada.';
 		end if;
@@ -99,6 +103,6 @@ execute function revisarDisponibilidad();
 -- Se creó una localidad con aforo de 4 y sus resoectivas entidades necesarias para poder insertar entradas a ella. Dicha localidad se encuentra con capacidad máxima. Podemos probar el uso del trigger con:
 -- Revisamos las entradas actuales, son 4.
 select * from entrada 
-where idevento = 444
+where idevento = 999
 -- Inserción cuando se excede la capacidad, regresará la excepción.
-insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0005', 'Fase 2', 444, 287, 100);
+insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0009', 'Fase 2', 999, 287, 100);
