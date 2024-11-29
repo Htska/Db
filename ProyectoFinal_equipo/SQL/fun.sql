@@ -106,3 +106,32 @@ select * from entrada
 where idevento = 999
 -- Inserción cuando se excede la capacidad, regresará la excepción.
 insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0009', 'Fase 2', 999, 287, 100);
+
+
+--DISPARADOR 2
+-- Agregamos la columna costoFinal a la tabla entrada, al se un atributo calculado, este no aparece en el modelo relacional.
+alter table entrada add column costoFinal int;
+
+-- Función que regresa un disparador, el cual se encarga de calcular el precio final de una entrada en especifico.
+create or replace function precioFinal()
+returns trigger as $$
+begin
+	-- El precio aumentará en 9% en cada fase que se avance.
+    new.costoFinal := new.costoBase *
+                      case
+                          when f.nombreFase = 'Fase 1' THEN 1.0 -- El precio es el mismo que el de base
+                          when f.nombreFase = 'Fase 2' THEN 1.09 
+                          when f.nombreFase = 'Fase 3' THEN 1.18
+                          when f.nombreFase = 'Fase 4' THEN 1.27
+end
+    from fase f
+    where f.idEvento = new.idEvento;
+
+    return new;
+end;
+$$ language plpgsql;
+-- Asociamos el trigger a la tabla entrada cuando se decida insertar o actualizar.
+create trigger actualizarPrecioFinal
+before insert or update on entrada
+for each row
+execute function precioFinal();
