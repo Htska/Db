@@ -135,3 +135,43 @@ predominante as (
 select predominante.nombreDisciplina, genero as genero_predominante
 from predominante join numeroGeneros on numeroGen = maxG and predominante.nombreDisciplina = numeroGeneros.nombreDisciplina
 order by predominante.nombreDisciplina;
+
+-- CONSULTA 10
+-- El atleta más jóven de cada disciplina, ordenados por el nombre de la disciplina
+
+-- Se crea una tabla temporal, donde se guarda la fecha de nacimiento mayor de cada disciplina
+
+with fechaMenor as (
+	select nombreDisciplina, max(fechaNacimiento) as fechaNacimiento
+	from practicar natural join atleta
+	group by nombreDisciplina
+)
+-- Query
+select nombreDisciplina, nombre, primerApellido, segundoApellido, fechaNacimiento 
+from atleta natural join fechaMenor
+order by nombreDisciplina ;
+
+
+-- CONSULTA 11
+-- Los jueces que supervisan la fase 4 de cada disciplina, ordenados por el nombre de la disciplina.
+
+select nombreDisciplina, nombre, primerApellido, segundoApellido 
+from juez natural join supervisar natural join disciplina natural join evento natural join fase
+where nombreFase = 'Fase 4'
+group by nombreDisciplina, nombre, primerApellido, segundoApellido
+order by nombreDisciplina ;
+
+-- CONSULTA 12
+-- El evento más largo de cada disciplina, ordenados por el nombre de la disciplina.
+
+-- Se crean una tabla temporal, donde se guarda la duración máxima de cada disciplina.
+
+with eventoMaximo as (
+	select nombreDisciplina, max(duracionMaxima) as duracionMaxima
+	from evento
+	group by nombreDisciplina
+)
+	
+select nombreFase, nombreDisciplina, duracionMaxima, fecha
+from fase natural join evento natural join eventoMaximo
+order by nombreDisciplina ;
