@@ -91,7 +91,7 @@ ORDER BY numeroPatrocinadores DESC, numeroEspectadores DESC;
 -- Eventos que se realizan fuera de Los Angeles pero dentro de Estados Unidos
 select idEvento, nombreDisciplina, nombre, ciudad, fecha
 from localidad natural join evento
-where nombrePais = 'United States' and ciudad <> 'Los Angeles'
+where nombrePais = 'United States' and ciudad <> 'Los Angeles';
 
 --CONSULTA 7
 
@@ -139,7 +139,7 @@ order by predominante.nombreDisciplina;
 -- CONSULTA 10
 -- El atleta más jóven de cada disciplina, ordenados por el nombre de la disciplina
 
--- Se crea una tabla temporal, donde se guarda la fecha de nacimiento mayor de cada disciplina
+-- Se crea una tabla temporal, donde se guarda la fecha de nacimiento mayor de un atleta en cada disciplina
 
 with fechaMenor as (
 	select nombreDisciplina, max(fechaNacimiento) as fechaNacimiento
@@ -153,13 +153,12 @@ order by nombreDisciplina ;
 
 
 -- CONSULTA 11
--- Los jueces que supervisan la fase 4 de cada disciplina, ordenados por el nombre de la disciplina.
+-- La fecha y lugar de la fase 4 de cada disciplina, ordenados por el nombre de la disciplina y cronología.
 
-select nombreDisciplina, nombre, primerApellido, segundoApellido 
-from juez natural join supervisar natural join disciplina natural join evento natural join fase
+select nombreDisciplina as disciplina, nombre as localidad, fecha, horaInicio as hora
+from localidad natural join evento natural join fase
 where nombreFase = 'Fase 4'
-group by nombreDisciplina, nombre, primerApellido, segundoApellido
-order by nombreDisciplina ;
+order by nombreDisciplina, fecha, hora;
 
 -- CONSULTA 12
 -- El evento más largo de cada disciplina, ordenados por el nombre de la disciplina.
@@ -171,7 +170,7 @@ with eventoMaximo as (
 	from evento
 	group by nombreDisciplina
 )
-	
+-- Query
 select nombreFase, nombreDisciplina, duracionMaxima, fecha
 from fase natural join evento natural join eventoMaximo
 order by nombreDisciplina ;
