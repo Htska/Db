@@ -58,8 +58,38 @@ language plpgsql;
 --select * from capacidadRestante();
 -- Obtener la capacidad de una localidad en especifico
 --select * from capacidadRestante(1);
--- Caso en donde se desee obtener la capacidad de una ocalidad inválida
+-- Caso en donde se desee obtener la capacidad de una localidad inválida
 --select * from capacidadRestante(200);
+
+
+-- FUNCION 3
+
+-- Función que recibe el nombre del país y disciplina, regresa los atletas de dicho país que  
+-- practican la diciplina, junto con la información de sus entrenadores.
+create or replace function equipo(npais varchar,ndisciplina varchar) returns setof "record" as 
+$$
+declare 
+	r record;
+begin 
+	for r in (select a.numeroPasaporte, a.nombre, a.primerApellido, a.segundoApellido, 
+				e.numeroPasaporte, e.nombre, e.primerApellido, e.segundoApellido from	
+	atleta as a natural join practicar as p 
+	join entrenar as et on et.numeroPasaporteA = a.numeroPasaporte 
+	join entrenador e on et.numeroPasaporteE = e.numeroPasaporte
+	where a.nombrePais = npais and p.nombreDisciplina = ndisciplina)
+	loop
+		return next r;
+	end loop;
+	return;
+end;
+$$
+language plpgsql;
+
+-- Ejemplos del uso de la función
+-- Cuando sí hay participantes del país y la disciplina
+--select * from equipo('United States','Archery') as (Atleta char(10), nombreA varchar, primerapellidoA varchar, segundoapellidoA varchar, Entrenador char(10), nombreE varchar, primerapellidoE varchar, segundoapellidoE varchar);
+-- No existe el país o no hay participantes: resultado vacío
+--select * from equipo('UNAM','Swimming') as (Atleta char(10), nombreA varchar, primerapellidoA varchar, segundoapellidoA varchar, Entrenador char(10), nombreE varchar, primerapellidoE varchar, segundoapellidoE varchar);
 
 
 
@@ -146,7 +176,7 @@ create table agenda(
 	duracionMaxima int,
 	precio int,
 	participantes text
-)
+);
 --Llave primaria
 alter table agenda add constraint agenda_pkey
 primary key (idEvento); 
