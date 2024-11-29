@@ -23,8 +23,8 @@ end;
 $$
 language plpgsql;
 
--- Uso de la función
-select * from medallero() as (Pais varchar, Oro bigint, Plata bigint, Bronce bigint);
+-- Ejemplo del uso de la función
+-- select * from medallero() as (Pais varchar, Oro bigint, Plata bigint, Bronce bigint);
 
 
 -- FUNCION 2
@@ -50,17 +50,16 @@ begin
 	where idLocalidadS is null or l.idLocalidad = idLocalidadS;
 end;									
 $$ 
-language plpgsql
+language plpgsql;
 
--- Usos de la función
+-- Ejemplos del uso de la función
 
---Obtener todas
-select * from capacidadRestante();
--- Obtener una localidad en especifico
-select * from capacidadRestante(1);
--- Localidad inválida
-select * from capacidadRestante(200);
-
+--Obtener todas las capacidades restantes.
+--select * from capacidadRestante();
+-- Obtener la capacidad de una localidad en especifico
+--select * from capacidadRestante(1);
+-- Caso en donde se desee obtener la capacidad de una ocalidad inválida
+--select * from capacidadRestante(200);
 
 
 
@@ -100,12 +99,13 @@ before insert or update on entrada
 for each row
 execute function revisarDisponibilidad();
 
+--Ejemplo del uso del trigger
 -- Se creó una localidad con aforo de 4 y sus resoectivas entidades necesarias para poder insertar entradas a ella. Dicha localidad se encuentra con capacidad máxima. Podemos probar el uso del trigger con:
 -- Revisamos las entradas actuales, son 4.
-select * from entrada 
-where idevento = 999
+--select * from entrada 
+--where idevento = 999
 -- Inserción cuando se excede la capacidad, regresará la excepción.
-insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0009', 'Fase 2', 999, 287, 100);
+--insert into entrada (folio, nombreFase, idEvento, numeroAsiento, costoBase) values ('ZQ87-ifjd5glhjr-0009', 'Fase 2', 999, 287, 100);
 
 
 --DISPARADOR 2
