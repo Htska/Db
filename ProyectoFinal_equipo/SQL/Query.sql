@@ -13,7 +13,7 @@ group by numeropasaporte, nombrepais, fechanacimiento, nacionalidad, nombre, pri
 order by oro desc, plata desc, bronce desc ;
 
 
--- COSULTA 2
+-- CONSULTA 2
 
 -- Información de los entrenadores que entrenan a atletas que practican más de 1 disciplina
 
@@ -161,7 +161,8 @@ where nombreFase = 'Fase 4'
 order by nombreDisciplina, fecha, hora;
 
 -- CONSULTA 12
--- El evento más largo de cada disciplina, ordenados por el nombre de la disciplina.
+-- El evento más largo de cada disciplina, ordenados por la duración máxima, el nombre
+-- de la disciplina y por cronología.
 
 -- Se crean una tabla temporal, donde se guarda la duración máxima de cada disciplina.
 
@@ -171,6 +172,66 @@ with eventoMaximo as (
 	group by nombreDisciplina
 )
 -- Query
-select nombreFase, nombreDisciplina, duracionMaxima, fecha
+select nombreFase, idEvento, nombreDisciplina, duracionMaxima, fecha
 from fase natural join evento natural join eventoMaximo
-order by nombreDisciplina ;
+order by duracionMaxima desc, nombreDisciplina, fase , fecha;
+
+-- CONSULTA 13
+
+-- La lista de correos de atletas que representan a México y de los entrenadores que los entrenan.
+
+-- Tabla temporal que relaciona los atletas que representan a México con sus respectivos correos.
+with t1 as (
+	select numeroPasaporte, correo
+	from atleta natural join correoAtleta
+	where nombrePais = 'Mexico'
+)
+-- Tabla temporal que cambia el nombre de la columna numeroPasaporte de la tabla 1.
+, t2 as (select numeroPasaporte as numeroPasaporteA from t1)
+-- Tabla temporal que hace un join natural para relacionar los atletas que representan a México con sus respectivos entrenadores.
+, t3 as (select * from t2 natural join entrenar)
+-- Tabla temporal que cambia el nombre de la columna numeroPasaporteE de la tabla 3.
+, t4 as (select numeroPasaporteE as numeroPasaporte from t3)
+-- Tabla temporal que hace un join natural para relacionar los atletas que representan a México con los atributos de sus respectivos entrenadores.
+, t5 as (select * from t4 natural join entrenador)
+-- Tabla temporal que relaciona a los entrenadores de los atletas que reprensentan a México con sus respectivos correos.
+, t6 as (select correo from correoentrenador natural join t5)
+-- La unión de los correos de atletas que representan a México junto a los correos de sus entrenadores.
+select correo from t1 union select correo from t6;
+
+-- CONSULTA 14
+
+-- Atletas y Entrenadores menores o iguales a 30 años que practican o entrenan Basketball o Football.
+select nombre, primerApellido, segundoApellido, nombrePais, fechaNacimiento, nombreDisciplina
+from atleta natural join practicar 
+where fechanacimiento > '1998-01-01' and (nombreDisciplina = 'Basketball' or nombreDisciplina = 'Football')
+union 
+select nombre, primerApellido, segundoApellido, nacionalidad, fechaNacimiento, nombreDisciplina
+from entrenador 
+where fechanacimiento > '1998-01-01' and (nombreDisciplina = 'Basketball' or nombreDisciplina = 'Football') 
+order by nombreDisciplina, fechaNacimiento;
+
+-- CONSULTA 15 
+
+-- El nombre completo y el teléfono de los Atletas, Entrenadores y Jueces que participaran, entrenaran o supervisaran en la localidad con id 1 "Los Angeles Memorial Coliseum"
+select nombre, primerApellido, segundoApellido, telefono
+from atleta natural join telefonoatleta natural join participar natural join evento 
+where idLocalidad = '1'
+intersect 
+select nombre, primerApellido, segundoApellido, telefono
+from atleta natural join telefonoAtleta
+union
+select nombre, primerApellido, segundoApellido, telefono
+from entrenador natural join telefonoEntrenador natural join disciplina natural join evento 
+where idLocalidad = '1'
+intersect 
+select nombre, primerApellido, segundoApellido, telefono
+from entrenador natural join telefonoEntrenador
+union
+select nombre, primerApellido, segundoApellido, telefono
+from juez natural join telefonoJuez natural join supervisar natural join disciplina natural join evento 
+where idLocalidad = '1'
+intersect 
+select nombre, primerApellido, segundoApellido, telefono
+from juez natural join telefonoJuez;
+
