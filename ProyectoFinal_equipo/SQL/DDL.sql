@@ -25,7 +25,7 @@ create table evento (
 	idLocalidad int,
 	nombreDisciplina varchar(50),
 	fecha date,
-	horaInicio timetz,
+	horaInicio time,
 	duracionMaxima int
 );
 
@@ -33,7 +33,7 @@ create table entrada (
 	folio char(20),
 	nombreFase varchar(20),
 	idEvento int,
-	numeroEvento int,
+	numeroAsiento int,
 	costoBase int
 );
 
@@ -197,7 +197,7 @@ set not null;
 alter table entrada alter column idEvento
 set not null;
 
-alter table entrada alter column numeroEvento
+alter table entrada alter column numeroAsiento
 set not null;
 
 alter table entrada add constraint entrada_d1
@@ -587,9 +587,6 @@ comment on constraint evento_pkey on evento is 'La llave primaria de la tabla ev
 comment on constraint evento_fkey1 on evento is 'Llave foránea de la tabla atleta, que hace referencia a la tabla localidad';
 comment on constraint evento_fkey2 on evento is 'Llave foránea de la tabla atleta, que hace referencia a la tabla disciplina';
 
--- modificación de nombre de la columna numeroEvento a numeroAsiento en la tabla entrada
-alter table entrada rename column numeroEvento to numeroAsiento;
-
 -- entrada
 comment on table entrada is 'Tabla que contiene la información de una entrada a un evento';
 comment on column entrada.nombreFase is 'El nombre de la fase a la cual da acceso la entrada';
@@ -701,6 +698,3 @@ comment on column entrenar.numeroPasaporteE is 'Número del pasaporte del entren
 comment on column entrenar.numeroPasaporteA is 'Número del pasaporte del atleta';
 comment on constraint entrenar_fkey1 on entrenar is 'Llave foránea de la tabla entrenar, hace referencia a la tabla entrenador';
 comment on constraint entrenar_fkey2 on entrenar is 'Llave foránea de la tabla entrenar, hace referencia a la tabla atleta';
-
--- modificación de tipo de la columna horaInicio de la tabla evento por time
-alter table evento alter column horaInicio type time;
